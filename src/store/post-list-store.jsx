@@ -32,7 +32,7 @@ const DEFAULT_POST_LIST = [
     id: "1",
     title: "Going to Lahore",
     body: "Hi, I am going to COMSATS University Islamabad, Lahore Campus on September 2, 2024 to start my 3rd semester of BSCS",
-    reaction: 0,
+    reaction: 13,
     userId: "Syed M.Hussnain Raza",
     tags: ["#university", "#vacations", "new_journey"],
   },
