@@ -1,7 +1,13 @@
 .postCard {
   margin: 20px 50px;
+  width: 30rem;
 }
 
 .hashtag {
   margin: 0px 3px;
+}
+
+.reactions {
+  width: 100%;
+  margin: 15px 0 0 0;
 }
