@@ -13,6 +13,8 @@ const postListReducer = (currPostList, action) => {
     newPostList = currPostList.filter(
       (post) => post.id !== action.payload.postId
     );
+  } else if (action.type === "ADD_POST") {
+    newPostList = [action.payload, ...currPostList];
   }
   return newPostList;
 };
@@ -23,7 +25,19 @@ const PostListProvider = ({ children }) => {
     DEFAULT_POST_LIST
   );
 
-  const addPost = () => {};
+  const addPost = (userId, postTitle, postBody, reactions, tags) => {
+    dispatchPostList({
+      type: "ADD_POST",
+      payload: {
+        id: Date.now(),
+        title: postTitle,
+        body: postBody,
+        reaction: reactions,
+        userId: userId,
+        tags: tags,
+      },
+    });
+  };
 
   const deletePost = (postId) => {
     dispatchPostList({
@@ -43,20 +57,20 @@ const PostListProvider = ({ children }) => {
 
 const DEFAULT_POST_LIST = [
   {
-    id: "1",
-    title: "Going to Lahore",
-    body: "Hi, I am going to COMSATS University Islamabad, Lahore Campus on September 2, 2024 to start my 3rd semester of BSCS",
-    reaction: 13,
-    userId: "Syed M.Hussnain Raza",
-    tags: ["#university", "#vacations", "new_journey"],
+    id: Date.now,
+    title: "Getting Started with React Hooks",
+    body: "React Hooks are a game-changer in the world of React. They allow you to use state and other React features without writing a class. In this post, we'll explore the basics of React Hooks, including useState and useEffect, and how they simplify your code. We'll also look at some common patterns and best practices for using hooks in your React applications",
+    reaction: 100,
+    userId: "102",
+    tags: ["#react", "#hooks", "javascript"],
   },
   {
-    id: "2",
-    title: "Going to BISE Lahore",
-    body: "Hi, I am going to BISE Lahore in August for getting the duplicate of HSSC Result Card",
-    reaction: 5,
-    userId: "Hussnain Raza",
-    tags: ["#HSSC_Result_Card", "#BISE_Lahore", "Duplicate_Result_Card"],
+    id: Date.now,
+    title: "Exploring JavaScript Destructuring",
+    body: "JavaScript destructuring is a powerful feature that allows you to extract properties from objects and elements from arrays with ease. In this post, we'll explore how to use destructuring to simplify your code and make it more readable. We'll cover array destructuring, object destructuring, and nested destructuring, along with practical examples and common use cases.",
+    reaction: 45,
+    userId: "101",
+    tags: ["#javascript", "#destructuring", "webDevelopment"],
   },
 ];
 
