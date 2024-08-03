@@ -28,7 +28,7 @@ const Footer = () => {
           </a>
         </li>
       </ul>
-      <p className="text-center text-body-secondary">© 2024 Company, Inc</p>
+      <p className="text-center text-body-secondary ">© 2024 - Syed Muhammad Hussnain Raza</p>
     </footer>
   );
 };
