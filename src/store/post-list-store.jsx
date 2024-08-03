@@ -59,7 +59,7 @@ const PostListProvider = ({ children }) => {
 // Default Posts that will be shown at start
 const DEFAULT_POST_LIST = [
   {
-    id: Date.now,
+    id: "default_1",
     title: "Getting Started with React Hooks",
     body: "React Hooks are a game-changer in the world of React. They allow you to use state and other React features without writing a class. In this post, we'll explore the basics of React Hooks, including useState and useEffect, and how they simplify your code. We'll also look at some common patterns and best practices for using hooks in your React applications",
     reaction: 100,
@@ -67,7 +67,7 @@ const DEFAULT_POST_LIST = [
     tags: ["#react", "#hooks", "javascript"],
   },
   {
-    id: Date.now,
+    id: "default_2",
     title: "Exploring JavaScript Destructuring",
     body: "JavaScript destructuring is a powerful feature that allows you to extract properties from objects and elements from arrays with ease. In this post, we'll explore how to use destructuring to simplify your code and make it more readable. We'll cover array destructuring, object destructuring, and nested destructuring, along with practical examples and common use cases.",
     reaction: 45,
