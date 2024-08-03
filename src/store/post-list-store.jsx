@@ -6,6 +6,7 @@ export const PostList = createContext({
   deletePost: () => {},
 });
 
+// Reducer Function that will deal with dispatch calls
 const postListReducer = (currPostList, action) => {
   let newPostList = currPostList;
 
@@ -55,6 +56,7 @@ const PostListProvider = ({ children }) => {
   );
 };
 
+// Default Posts that will be shown at start
 const DEFAULT_POST_LIST = [
   {
     id: Date.now,
