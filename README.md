@@ -28,7 +28,7 @@ A simple Social Media application built using React.js. This app allows users to
 2. **Navigate to the Project Directory:**:
 
    ```sh
-   cd social-media
+   cd Social-Media-React
    ```
 
 3. **Install Dependencies:**:
