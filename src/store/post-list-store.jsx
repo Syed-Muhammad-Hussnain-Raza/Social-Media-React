@@ -3,6 +3,7 @@ import { createContext, useReducer } from "react";
 export const PostList = createContext({
   postList: [],
   addPost: () => {},
+  addInitialPosts: () => {},
   deletePost: () => {},
 });
 
@@ -16,15 +17,14 @@ const postListReducer = (currPostList, action) => {
     );
   } else if (action.type === "ADD_POST") {
     newPostList = [action.payload, ...currPostList];
+  } else if (action.type === "ADD_INITIAL_POSTS") {
+    newPostList = action.payload.posts;
   }
   return newPostList;
 };
 
 const PostListProvider = ({ children }) => {
-  const [postList, dispatchPostList] = useReducer(
-    postListReducer,
-    DEFAULT_POST_LIST
-  );
+  const [postList, dispatchPostList] = useReducer(postListReducer, []);
 
   const addPost = (userId, postTitle, postBody, reactions, tags) => {
     dispatchPostList({
@@ -40,6 +40,15 @@ const PostListProvider = ({ children }) => {
     });
   };
 
+  const addInitialPosts = (posts) => {
+    dispatchPostList({
+      type: "ADD_INITIAL_POSTS",
+      payload: {
+        posts,
+      },
+    });
+  };
+
   const deletePost = (postId) => {
     dispatchPostList({
       type: "DELETE_POST",
@@ -50,30 +59,12 @@ const PostListProvider = ({ children }) => {
   };
 
   return (
-    <PostList.Provider value={{ postList, addPost, deletePost }}>
+    <PostList.Provider
+      value={{ postList, addPost, addInitialPosts, deletePost }}
+    >
       {children}
     </PostList.Provider>
   );
 };
-
-// Default Posts that will be shown at start
-const DEFAULT_POST_LIST = [
-  {
-    id: "default_1",
-    title: "Getting Started with React Hooks",
-    body: "React Hooks are a game-changer in the world of React. They allow you to use state and other React features without writing a class. In this post, we'll explore the basics of React Hooks, including useState and useEffect, and how they simplify your code. We'll also look at some common patterns and best practices for using hooks in your React applications",
-    reaction: 100,
-    userId: "102",
-    tags: ["#react", "#hooks", "javascript"],
-  },
-  {
-    id: "default_2",
-    title: "Exploring JavaScript Destructuring",
-    body: "JavaScript destructuring is a powerful feature that allows you to extract properties from objects and elements from arrays with ease. In this post, we'll explore how to use destructuring to simplify your code and make it more readable. We'll cover array destructuring, object destructuring, and nested destructuring, along with practical examples and common use cases.",
-    reaction: 45,
-    userId: "101",
-    tags: ["#javascript", "#destructuring", "webDevelopment"],
-  },
-];
 
 export default PostListProvider;
