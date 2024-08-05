@@ -1,4 +1,4 @@
-import { createContext, useReducer } from "react";
+import { createContext, useCallback, useReducer } from "react";
 
 export const PostList = createContext({
   postList: [],
@@ -26,37 +26,46 @@ const postListReducer = (currPostList, action) => {
 const PostListProvider = ({ children }) => {
   const [postList, dispatchPostList] = useReducer(postListReducer, []);
 
-  const addPost = (userId, postTitle, postBody, reactions, tags) => {
-    dispatchPostList({
-      type: "ADD_POST",
-      payload: {
-        id: Date.now(),
-        title: postTitle,
-        body: postBody,
-        reaction: reactions,
-        userId: userId,
-        tags: tags,
-      },
-    });
-  };
+  const addPost = useCallback(
+    (userId, postTitle, postBody, reactions, tags) => {
+      dispatchPostList({
+        type: "ADD_POST",
+        payload: {
+          id: Date.now(),
+          title: postTitle,
+          body: postBody,
+          reaction: reactions,
+          userId: userId,
+          tags: tags,
+        },
+      });
+    },
+    [dispatchPostList]
+  );
 
-  const addInitialPosts = (posts) => {
-    dispatchPostList({
-      type: "ADD_INITIAL_POSTS",
-      payload: {
-        posts,
-      },
-    });
-  };
+  const addInitialPosts = useCallback(
+    (posts) => {
+      dispatchPostList({
+        type: "ADD_INITIAL_POSTS",
+        payload: {
+          posts,
+        },
+      });
+    },
+    [dispatchPostList]
+  );
 
-  const deletePost = (postId) => {
-    dispatchPostList({
-      type: "DELETE_POST",
-      payload: {
-        postId,
-      },
-    });
-  };
+  const deletePost = useCallback(
+    (postId) => {
+      dispatchPostList({
+        type: "DELETE_POST",
+        payload: {
+          postId,
+        },
+      });
+    },
+    [dispatchPostList]
+  );
 
   return (
     <PostList.Provider
