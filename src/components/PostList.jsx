@@ -9,24 +9,24 @@ const PostList = () => {
 
   const [fetching, setFetching] = useState(false);
 
-  useEffect(() => {
-    setFetching(true);
+  // useEffect(() => {
+  //   setFetching(true);
 
-    const controller = new AbortController();
-    const signal = controller.signal;
+  //   const controller = new AbortController();
+  //   const signal = controller.signal;
 
-    fetch("https://dummyjson.com/posts", { signal })
-      .then((res) => res.json())
-      .then((data) => {
-        addInitialPosts(data.posts);
-        setFetching(false);
-      });
+  //   fetch("https://dummyjson.com/posts", { signal })
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       addInitialPosts(data.posts);
+  //       setFetching(false);
+  //     });
 
-    return () => {
-      console.log("Cleaning up UseEffect.");
-      controller.abort();
-    };
-  }, []);
+  //   return () => {
+  //     console.log("Cleaning up UseEffect.");
+  //     controller.abort();
+  //   };
+  // }, []);
 
   return (
     <>
