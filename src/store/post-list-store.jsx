@@ -27,17 +27,10 @@ const PostListProvider = ({ children }) => {
   const [postList, dispatchPostList] = useReducer(postListReducer, []);
 
   const addPost = useCallback(
-    (userId, postTitle, postBody, reactions, tags) => {
+    (post) => {
       dispatchPostList({
         type: "ADD_POST",
-        payload: {
-          id: Date.now(),
-          title: postTitle,
-          body: postBody,
-          reaction: reactions,
-          userId: userId,
-          tags: tags,
-        },
+        payload: post,
       });
     },
     [dispatchPostList]
