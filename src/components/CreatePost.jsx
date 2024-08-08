@@ -18,7 +18,7 @@ const CreatePost = () => {
     const userId = userIdElement.current.value;
     const postTitle = postTitleElement.current.value;
     const postBody = postBodyElement.current.value;
-    const reactions = reactionsElement.current.value;
+    const reactions = Number(reactionsElement.current.value) || 0; // Default to 0 if empty or invalid
     const tags = tagsElement.current.value.split(" ");
 
     userIdElement.current.value = "";
@@ -33,14 +33,17 @@ const CreatePost = () => {
       body: JSON.stringify({
         title: postTitle,
         body: postBody,
-        reaction: reactions,
+        reactions: { likes: reactions, dislikes: 0 }, // Set initial reactions
         userId: userId,
         tags: tags,
       }),
     })
       .then((res) => res.json())
       .then((post) => {
-        addPost(post);
+        addPost({
+          ...post,
+          reaction: post.reactions.likes + post.reactions.dislikes, // Calculate total reactions
+        });
         navigate("/");
       });
   };
