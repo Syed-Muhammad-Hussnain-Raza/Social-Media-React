@@ -13,7 +13,22 @@ export const PostList = createContext({
   fetching: false,
 });
 
-// Reducer Function that will deal with dispatch calls
+// // Reducer Function that will deal with dispatch calls
+// const postListReducer = (currPostList, action) => {
+//   let newPostList = currPostList;
+
+//   if (action.type === "DELETE_POST") {
+//     newPostList = currPostList.filter(
+//       (post) => post.id !== action.payload.postId
+//     );
+//   } else if (action.type === "ADD_POST") {
+//     newPostList = [action.payload, ...currPostList];
+//   } else if (action.type === "ADD_INITIAL_POSTS") {
+//     newPostList = action.payload.posts;
+//   }
+//   return newPostList;
+// };
+
 const postListReducer = (currPostList, action) => {
   let newPostList = currPostList;
 
@@ -24,7 +39,10 @@ const postListReducer = (currPostList, action) => {
   } else if (action.type === "ADD_POST") {
     newPostList = [action.payload, ...currPostList];
   } else if (action.type === "ADD_INITIAL_POSTS") {
-    newPostList = action.payload.posts;
+    newPostList = action.payload.posts.map(post => ({
+      ...post,
+      reaction: post.reactions ? post.reactions.likes + post.reactions.dislikes : 0
+    }));
   }
   return newPostList;
 };
