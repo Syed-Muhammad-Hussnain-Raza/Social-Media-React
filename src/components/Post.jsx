@@ -2,6 +2,7 @@ import { useContext } from "react";
 import styles from "./Post.module.css";
 import { MdDelete } from "react-icons/md";
 import { PostList } from "../store/post-list-store";
+
 const Post = ({ post }) => {
   const { deletePost } = useContext(PostList);
 
